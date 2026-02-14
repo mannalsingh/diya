@@ -129,16 +129,21 @@ function typeEffect(){
 }
 typeEffect();
 
-// ===== Move NO Button =====
+// ===== Move NO Button on Hover =====
 const noBtn=document.getElementById("noBtn");
+
 function moveButton(){
     const maxX=window.innerWidth-noBtn.offsetWidth;
     const maxY=window.innerHeight-noBtn.offsetHeight;
     noBtn.style.left=Math.random()*maxX+"px";
     noBtn.style.top=Math.random()*maxY+"px";
 }
+
 moveButton();
-noBtn.addEventListener("click",moveButton);
+
+// 👇 Cursor jaate hi bhagega
+noBtn.addEventListener("mouseenter", moveButton);
+noBtn.addEventListener("mouseover", moveButton);
 
 // ===== Music Auto =====
 window.addEventListener("load", function(){
@@ -204,4 +209,3 @@ document.getElementById("yesBtn").addEventListener("click",function(){
 
 </body>
 </html>
-
