@@ -111,8 +111,9 @@ canvas{
 
 <canvas id="fireworks"></canvas>
 
-<audio id="bgMusic" loop autoplay>
-    <source src="dil.mp3" type="audio/mp3">
+<!-- ✅ Updated Audio Section -->
+<audio id="bgMusic" loop>
+    <source src="Boyfriend.mp3" type="audio/mp3">
 </audio>
 
 <script>
@@ -141,21 +142,23 @@ function moveButton(){
 
 moveButton();
 
-// 👇 Cursor jaate hi bhagega
 noBtn.addEventListener("mouseenter", moveButton);
 noBtn.addEventListener("mouseover", moveButton);
 
-// ===== Music Auto =====
+// ===== Force Music Play =====
 window.addEventListener("load", function(){
     const music = document.getElementById("bgMusic");
-    const playPromise = music.play();
-    if(playPromise !== undefined){
-        playPromise.catch(()=>{
-            document.body.addEventListener("click",function(){
-                music.play();
-            },{once:true});
-        });
+
+    function playMusic() {
+        music.play().catch(() => {});
     }
+
+    // Page load par try karega
+    playMusic();
+
+    // Agar browser block kare toh first click par play
+    document.addEventListener("click", playMusic, { once: true });
+    document.addEventListener("touchstart", playMusic, { once: true });
 });
 
 // ===== Fireworks =====
@@ -199,7 +202,6 @@ animateFireworks();
 // YES Click
 document.getElementById("yesBtn").addEventListener("click",function(){
     createFirework(window.innerWidth/2,window.innerHeight/2);
-    localStorage.setItem("musicPlaying","true");
     setTimeout(()=>{
         window.location.href="love.html";
     },2000);
